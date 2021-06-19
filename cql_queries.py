@@ -10,7 +10,7 @@ create_db = ("""
 # 1. Give me the artist, song title and song's length in the music app history that was heard during sessionId = 338, and itemInSession = 4¶
 
 create_table_1 = ("""
-    CREATE TABLE IF NOT EXISTS table_1 (
+    CREATE TABLE IF NOT EXISTS song_session_history (
         session_id int
         , item_in_session int
         , artist text
@@ -20,7 +20,7 @@ create_table_1 = ("""
 """)
 
 insert_table_1 = ("""
-    INSERT INTO table_1 (
+    INSERT INTO song_session_history (
         session_id
         , item_in_session
         , artist
@@ -35,13 +35,13 @@ select_table_1 = ("""
         artist
         , song_title
         , song_length
-    FROM table_1 
+    FROM song_session_history
     WHERE session_id = 338
     AND item_in_session = 4
 """)
 
 drop_table_1 = ("""
-    DROP TABLE table_1
+    DROP TABLE song_session_history
 """)
 
 
@@ -49,7 +49,7 @@ drop_table_1 = ("""
 # 2. Give me only the following: name of artist, song (sorted by itemInSession) and user (first and last name) for userid = 10, sessionid = 182
 
 create_table_2 = ("""
-    CREATE TABLE IF NOT EXISTS table_2 (
+    CREATE TABLE IF NOT EXISTS user_session_history (
         user_id int
         , session_id int
         , item_in_session int
@@ -61,7 +61,7 @@ create_table_2 = ("""
 """)
 
 insert_table_2 = ("""
-    INSERT INTO table_2 (
+    INSERT INTO user_session_history (
         user_id
         , session_id
         , item_in_session
@@ -79,14 +79,14 @@ select_table_2 = ("""
         , song_title
         , user_first_name
         , user_last_name
-    FROM table_2
+    FROM user_session_history
     WHERE user_id = 10
     AND session_id = 182
     ORDER BY session_id, item_in_session
 """)
 
 drop_table_2 = ("""
-    DROP TABLE table_2
+    DROP TABLE user_session_history
 """)
 
 
@@ -94,7 +94,7 @@ drop_table_2 = ("""
 # 3. Give me every user name (first and last) in my music app history who listened to the song 'All Hands Against His Own'
 
 create_table_3 = ("""
-    CREATE TABLE IF NOT EXISTS table_3 (
+    CREATE TABLE IF NOT EXISTS user_song_history (
         song_title text
         , user_id int
         , user_first_name text
@@ -103,7 +103,7 @@ create_table_3 = ("""
 """)
 
 insert_table_3 = ("""
-    INSERT INTO table_3 (
+    INSERT INTO user_song_history (
         song_title
         , user_id
         , user_first_name
@@ -116,12 +116,12 @@ select_table_3 = ("""
     SELECT
         user_first_name
         , user_last_name
-    FROM table_3
+    FROM user_song_history
     WHERE song_title = 'All Hands Against His Own'
 """)
 
 drop_table_3 = ("""
-    DROP TABLE table_3
+    DROP TABLE user_song_history
 """)
 
 
