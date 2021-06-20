@@ -48,6 +48,12 @@ drop_table_1 = ("""
 # TABLE 2 DATA
 # 2. Give me only the following: name of artist, song (sorted by itemInSession) and user (first and last name) for userid = 10, sessionid = 182
 
+# USEFUL COMMENT:
+# You have used PRIMARY KEY(userId, sessionId, itemInSession). However, note that this is not an optimal choice of partition key (currently only userId) 
+# because sessions belonging to the same user might be in different nodes. This will cause a performance issue if the database is very large. Therefore 
+# we should use both userId and sessionId as partition keys so sessions from the same user are stored together. 
+# You can do this by PRIMARY KEY((userId, sessionId), itemInSession).
+
 create_table_2 = ("""
     CREATE TABLE IF NOT EXISTS user_session_history (
         user_id int
@@ -57,8 +63,10 @@ create_table_2 = ("""
         , song_title text
         , user_first_name text
         , user_last_name text
-    , PRIMARY KEY (user_id, session_id, item_in_session))
+    , PRIMARY KEY ((user_id, session_id), item_in_session)
+    )
 """)
+
 
 insert_table_2 = ("""
     INSERT INTO user_session_history (
@@ -82,7 +90,7 @@ select_table_2 = ("""
     FROM user_session_history
     WHERE user_id = 10
     AND session_id = 182
-    ORDER BY session_id, item_in_session
+    ORDER BY item_in_session
 """)
 
 drop_table_2 = ("""
