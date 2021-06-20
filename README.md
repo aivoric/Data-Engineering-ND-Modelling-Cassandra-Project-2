@@ -58,7 +58,7 @@ Cassandra can be tricky tp setup locally. Here are a few useful links to help yo
 
 The database contains 3 tables which have been optimised for retrieving data for 3 queries.
 
-1. Give me the artist, song title and song's length in the music app history that was heard during sessionId = 338, and itemInSession = 4¶
+1. Give me the artist, song title and song's length in the music app history that was heard during sessionId = 338, and itemInSession = 4
 
 ```
 CREATE TABLE IF NOT EXISTS song_session_history (
